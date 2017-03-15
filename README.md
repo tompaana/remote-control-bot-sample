@@ -2,7 +2,8 @@
 
 This sample demonstrates how to control a chatbot, built on the
 [Microsoft Bot Framework](https://dev.botframework.com/), utilizing backchannel
-messages.
+messages. The covering note (a blog post) for this sample is here:
+[Remotely Controlled Bots](http://tomipaananen.azurewebsites.net/?p=2231).
 
 ![Sample in action](Documentation/Screenshot.png?raw=true)
 
