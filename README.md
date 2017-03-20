@@ -32,8 +32,8 @@ work.
 The implementation consists of roughly 3 different concepts:
 
 1. Backchannel receiver (implemented in this sample by
-   [NotificationsScorable](RemoteControlBotSample/Notifications/NotificationsScorable.cs)
-   - see `PrepareAsync` method)
+   [NotificationsScorable](RemoteControlBotSample/Notifications/NotificationsScorable.cs),
+   see `PrepareAsync` method)
 2. Notification type and handler (in [Notifications](RemoteControlBotSample/Notifications) folder)
 3. Message routing for delivering the notifications to (specific) users
  * This message routing logic is a subset of features implemented and documented
@@ -52,7 +52,7 @@ the user:
    class
 3. Autofac checks for registered handlers at the previous step (step 2)
  * It will find two: [MessageRouterScorable](RemoteControlBotSample/MessageRouting/MessageRouterScorable.cs)
-   and [NotificationsScorable](RemoteControlBotSample/Notifications/NotificationsScorable)
+   and [NotificationsScorable](RemoteControlBotSample/Notifications/NotificationsScorable.cs)
  * `MessageRouterScorable` always stores the sender and the receiver of a
    message, if they have not been seen before (see
    [Chatbots as Middlemen article](http://tomipaananen.azurewebsites.net/?p=1851)
@@ -71,7 +71,7 @@ to the bot according to the notifications protocol we've agreed on:
 1. A notification specific backchannel message is sent to the bot
 2. The received `Activity` instance  is **seemingly** passed to the root dialog
    in `MessagesController` class - however it the dialog will never receive the
-   `Activity` because of the `NotificationsScorable` class, because...
+   `Activity` because of the `NotificationsScorable` class, and that is because...
 3. Autofac happens
  * Now a backchannel message is detected by `NotificationScorable`, the score
    will exist and its value will be `1.0d` (fancy way of saying the value of action
