@@ -1,5 +1,4 @@
-﻿using Microsoft.Bot.Connector;
-using RemoteControlBotControllerSample.Notifications;
+﻿using RemoteControlBotControllerSample.Notifications;
 using RemoteControlBotSample.MessageRouting;
 using System;
 using System.Collections.Generic;
