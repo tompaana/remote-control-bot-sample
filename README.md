@@ -84,14 +84,14 @@ to the bot according to the notifications protocol we've agreed on:
 
 ### Why Autofac? ###
 
-As you noticed from the descriptions of the previous scenarios, Autofac -
-an implementation of inversion of control (IoC) container - makes it harder to
-understand the execution flow of the code without a thorough inspection (or
-proper documentation). In other words, IoC makes it more difficult to have
-self-documenting code. That's why I don't like Autofac or IoC containers in
-general. I'd rather have the backchannel detection (and other things) written in
-`MessagesController` class, before the decision to forward the `Activity`
-instance to the root dialog is made:
+As you noticed from the descriptions of the previous scenarios,
+[Autofac](https://autofac.org/) - an implementation of inversion of control
+(IoC) container - makes it harder to understand the execution flow of the code
+without a thorough inspection (or proper documentation). In other words, IoC
+makes it more difficult to have self-documenting code. That's why I don't like
+Autofac or IoC containers in general. I'd rather have the backchannel detection
+(and other things) written in `MessagesController` class, before the decision to
+forward the `Activity` instance to the root dialog is made:
 
 ```cs
 MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
