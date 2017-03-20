@@ -94,13 +94,13 @@ general. I'd rather have the backchannel detection (and other things) written in
 instance to the root dialog is made:
 
 ```cs
-MessageRouting.MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
+MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
 string notificationData = string.Empty;
 
-if (Notifications.NotificationsManager.TryGetNotificationData(activity, out notificationData))
+if (NotificationsManager.TryGetNotificationData(activity, out notificationData))
 {
     // A notification related backchannel message was detected
-    await Notifications.NotificationsManager.SendNotificationAsync(notificationData);
+    await NotificationsManager.SendNotificationAsync(notificationData);
 }
 else
 {
