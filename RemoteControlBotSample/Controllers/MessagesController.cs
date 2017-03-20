@@ -19,6 +19,24 @@ namespace RemoteControlBotSample
         {
             if (activity.Type == ActivityTypes.Message)
             {
+                // Option 1: Direct handling
+                // If you want to go with this option, do remember to remove the registration
+                // of the scorables in Global.asax.cs.
+                /*MessageRouting.MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
+                string notificationData = string.Empty;
+
+                if (Notifications.NotificationsManager.TryGetNotificationData(activity, out notificationData))
+                {
+                    // A notification related backchannel message was detected
+                    await Notifications.NotificationsManager.SendNotificationAsync(notificationData);
+                }
+                else
+                {
+                    await Conversation.SendAsync(activity, () => new RootDialog());
+                }*/
+
+                // Option 2: Using inversion of control (IoC) container
+                // See Global.asax.cs and GlobalMessageHandlerModule.cs
                 await Conversation.SendAsync(activity, () => new RootDialog());
             }
             else

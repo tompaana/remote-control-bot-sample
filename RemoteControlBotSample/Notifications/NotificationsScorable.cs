@@ -13,7 +13,6 @@ namespace RemoteControlBotSample.Notifications
     /// </summary>
     public class NotificationsScorable : ScorableBase<IActivity, string, double>
     {
-        private const string NotificationBackchannelId = "notification";
         private readonly IDialogTask _dialogTask;
 
         public NotificationsScorable(IDialogTask dialogTask)
@@ -76,16 +75,9 @@ namespace RemoteControlBotSample.Notifications
 #pragma warning disable 1998
         protected override async Task<string> PrepareAsync(IActivity activity, CancellationToken cancellationToken)
         {
-            if (activity is IMessageActivity messageActivity
-                && !string.IsNullOrEmpty(messageActivity.Text)
-                && messageActivity.Text.Equals(NotificationBackchannelId)
-                && messageActivity.ChannelData != null)
-            {
-                // Backchannel message with ID matching notifications action found
-                return (activity as IMessageActivity).ChannelData.ToString();
-            }
-
-            return string.Empty;
+            string notificationData = string.Empty;
+            NotificationsManager.TryGetNotificationData((activity as Activity), out notificationData);
+            return notificationData;
         }
 #pragma warning restore 1998
     }

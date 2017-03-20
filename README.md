@@ -84,13 +84,29 @@ to the bot according to the notifications protocol we've agreed on:
 
 ### Why Autofac? ###
 
-As you noticed from the descriptions of the previous scenarios, Autofac makes it
-harder to understand the execution flow of the code without a thorough
-inspection (or proper documentation). That's why I don't like Autofac or the
-inversion of control (IoC) containers it represents. I'd rather have the
-backchannel detection (and other things) written in `MessagesController` class,
-before the decision to forward the `Activity` instance to the root dialog is
-made.
+As you noticed from the descriptions of the previous scenarios, Autofac -
+an implementation of inversion of control (IoC) container - makes it harder to
+understand the execution flow of the code without a thorough inspection (or
+proper documentation). In other words, IoC makes it more difficult to have
+self-documenting code. That's why I don't like Autofac or IoC containers in
+general. I'd rather have the backchannel detection (and other things) written in
+`MessagesController` class, before the decision to forward the `Activity`
+instance to the root dialog is made:
+
+```cs
+MessageRouting.MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
+string notificationData = string.Empty;
+
+if (Notifications.NotificationsManager.TryGetNotificationData(activity, out notificationData))
+{
+    // A notification related backchannel message was detected
+    await Notifications.NotificationsManager.SendNotificationAsync(notificationData);
+}
+else
+{
+    await Conversation.SendAsync(activity, () => new RootDialog());
+}
+```
 
 However, if you are using the Microsoft Bot Builder SDK, there is no escape from
 Autofac since the SDK is built using it. You can still avoid the use in the code
