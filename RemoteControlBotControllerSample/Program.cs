@@ -37,6 +37,12 @@ namespace RemoteControlBotControllerSample
                     await notificationSender.NotifyAsync(partiesToNotify, $"Notification test {(i + 1)}");
 
                 Log($"{((resourceResponse == null) ? "Received no response" : $"Received resource response with ID {resourceResponse.Id}")}");
+
+#if DEBUG
+                // The following will dump the activity info into Output (console)
+                Microsoft.Bot.Connector.DirectLine.Activity activity = await notificationSender.GetLatestReplyAsync();
+#endif
+
                 Thread.Sleep(3000);
             }
 

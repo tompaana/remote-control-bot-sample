@@ -13,6 +13,7 @@ namespace RemoteControlBotControllerSample.Notifications
         private const string NotificationsBackchannelId = "notification";
         private const string ActivityTypeMessage = "message";
         private Conversation _conversation;
+        private string _watermark;
         private string _botSecret;
 
         /// <summary>
@@ -48,6 +49,36 @@ namespace RemoteControlBotControllerSample.Notifications
             }
 
             return await PostActivityAsync(CreateNotificationActivity(notification, NotificationsBackchannelId));
+        }
+
+        /// <summary>
+        /// Gets the latest reply (Activity) from the bot.
+        /// </summary>
+        /// <returns>The latest Activity instance or null, if none available.</returns>
+        public async Task<Activity> GetLatestReplyAsync()
+        {
+            ActivitySet activitySet = await GetActivitySetAsync();
+            Activity activity = null;
+
+            if (activitySet != null
+                && activitySet.Activities != null
+                && activitySet.Activities.Count > 0)
+            {
+#if DEBUG
+                for (int i = 0; i < activitySet.Activities.Count; ++i)
+                {
+                    Activity a = activitySet.Activities[i];
+
+                    if (a != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"GetLatestReplyAsync: Activity {(i + 1)}: Text: \"{a.Text}\" ChannelData: \"{a.ChannelData}\"");
+                    }
+                }
+#endif
+                activity = activitySet.Activities[activitySet.Activities.Count - 1];
+            }
+
+            return activity;
         }
 
         /// <summary>
@@ -91,6 +122,39 @@ namespace RemoteControlBotControllerSample.Notifications
             }
 
             return resourceResponse;
+        }
+
+        /// <summary>
+        /// Gets the latest activity set of the current conversation.
+        /// </summary>
+        /// <returns>The latest activity set or null, if no conversation or no activities since the last time we checked.</returns>
+        private async Task<ActivitySet> GetActivitySetAsync()
+        {
+            ActivitySet activitySet = null;
+
+            if (_conversation != null)
+            {
+                using (DirectLineClient directLineClient = new DirectLineClient(_botSecret))
+                {
+                    directLineClient.Conversations.ReconnectToConversation(_conversation.ConversationId);
+
+                    if (string.IsNullOrEmpty(_watermark))
+                    {
+                        activitySet = await directLineClient.Conversations.GetActivitiesAsync(_conversation.ConversationId);
+                    }
+                    else
+                    {
+                        activitySet = await directLineClient.Conversations.GetActivitiesAsync(_conversation.ConversationId, _watermark);
+                    }
+                }
+
+                if (activitySet != null)
+                {
+                    _watermark = activitySet.Watermark;
+                }
+            }
+
+            return activitySet;
         }
     }
 }
