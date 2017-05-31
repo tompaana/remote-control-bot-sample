@@ -116,4 +116,5 @@ nor wrong. Only debatable :)
 ## See also ##
 
 * [Remotely Controlled Bots article](http://tomipaananen.azurewebsites.net/?p=2231)
+* [Interruption Bot Sample](https://github.com/svandenhoven/Bots/tree/master/BotNotificationInteruptions): *"Contains a bot that can handle interuptions from a proactive bot. Low Prio interruptions are stacked and only shown when a defined dialog has stopped."*
 * [Intermediator Bot Sample](https://github.com/tompaana/intermediator-bot-sample)
