@@ -1,9 +1,9 @@
 ﻿using Microsoft.Bot.Connector.DirectLine;
-using RemoteControlBotSample.MessageRouting;
 using RemoteControlBotSample.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Underscore.Bot.Models;
 
 namespace RemoteControlBotControllerSample.Notifications
 {

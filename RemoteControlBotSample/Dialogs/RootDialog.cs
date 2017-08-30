@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
-using RemoteControlBotSample.MessageRouting;
+using Underscore.Bot.MessageRouting;
+using Underscore.Bot.Models;
 
 namespace RemoteControlBotSample.Dialogs
 {
@@ -28,7 +29,7 @@ namespace RemoteControlBotSample.Dialogs
                 if (messageActivity.ChannelData != null)
                 {
                     // For debugging let's broadcast the received channel data content
-                    MessageRouterManager messageRouterManager = MessageRouterManager.Instance;
+                    MessageRouterManager messageRouterManager = WebApiConfig.MessageRouterManager;
                     IList<Party> userParties = messageRouterManager.RoutingDataManager.GetUserParties();
 
                     if (userParties.Count == 0)

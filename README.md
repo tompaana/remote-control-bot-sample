@@ -37,7 +37,7 @@ The implementation consists of roughly 3 different concepts:
 2. Notification type and handler (in [Notifications](RemoteControlBotSample/Notifications) folder)
 3. Message routing for delivering the notifications to (specific) users
    * This message routing logic is a subset of features implemented and documented
-     in [Intermediator Bot Sample](https://github.com/tompaana/intermediator-bot-sample)
+     in [Bot Message Routing (component) project](https://github.com/tompaana/bot-message-routing)
 
 ### How does it work? ###
 
@@ -117,4 +117,5 @@ nor wrong. Only debatable :)
 
 * [Remotely Controlled Bots article](http://tomipaananen.azurewebsites.net/?p=2231)
 * [Interruption Bot Sample](https://github.com/svandenhoven/Bots/tree/master/BotNotificationInteruptions): *"Contains a bot that can handle interuptions from a proactive bot. Low Prio interruptions are stacked and only shown when a defined dialog has stopped."*
+* [Bot Message Routing (component) project](https://github.com/tompaana/bot-message-routing)
 * [Intermediator Bot Sample](https://github.com/tompaana/intermediator-bot-sample)

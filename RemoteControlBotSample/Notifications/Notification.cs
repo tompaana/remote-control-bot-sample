@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using RemoteControlBotSample.MessageRouting;
 using System;
 using System.Collections.Generic;
+using Underscore.Bot.Models;
 
 namespace RemoteControlBotSample.Notifications
 {

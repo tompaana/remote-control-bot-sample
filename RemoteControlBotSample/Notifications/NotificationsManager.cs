@@ -1,7 +1,8 @@
 ﻿using Microsoft.Bot.Connector;
-using RemoteControlBotSample.MessageRouting;
 using System.Linq;
 using System.Threading.Tasks;
+using Underscore.Bot.MessageRouting;
+using Underscore.Bot.Models;
 
 namespace RemoteControlBotSample.Notifications
 {
@@ -21,10 +22,12 @@ namespace RemoteControlBotSample.Notifications
         {
             if (notification != null)
             {
+                MessageRouterManager messageRouterManager = WebApiConfig.MessageRouterManager;
+
                 if (notification.PartiesToNotify == null || notification.PartiesToNotify.Count() == 0)
                 {
                     // No receivers given - broadcast the notification to all users the bot is aware of
-                    notification.PartiesToNotify.AddRange(MessageRouterManager.Instance.RoutingDataManager.GetUserParties());
+                    notification.PartiesToNotify.AddRange(messageRouterManager.RoutingDataManager.GetUserParties());
                 }
 
                 if (string.IsNullOrEmpty(notification.Message))
@@ -35,7 +38,7 @@ namespace RemoteControlBotSample.Notifications
 
                 foreach (Party partyToNotify in notification.PartiesToNotify)
                 {
-                    await MessageRouterManager.Instance.SendMessageToPartyByBotAsync(partyToNotify, notification.Message);
+                    await messageRouterManager.SendMessageToPartyByBotAsync(partyToNotify, notification.Message);
                 }
             }
         }

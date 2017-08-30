@@ -39,7 +39,7 @@ namespace RemoteControlBotSample.MessageRouting
 #pragma warning disable 1998
         protected override async Task<string> PrepareAsync(IActivity activity, CancellationToken cancellationToken)
         {
-            MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
+            WebApiConfig.MessageRouterManager.MakeSurePartiesAreTracked(activity);
             return string.Empty;
         }
 #pragma warning restore 1998

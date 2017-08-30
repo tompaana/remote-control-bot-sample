@@ -1,14 +1,19 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
+using Underscore.Bot.MessageRouting;
+using Underscore.Bot.MessageRouting.DataStore;
 
 namespace RemoteControlBotSample
 {
     public static class WebApiConfig
     {
+        public static MessageRouterManager MessageRouterManager
+        {
+            get;
+            private set;
+        }
+
         public static void Register(HttpConfiguration config)
         {
             // Json settings
@@ -32,6 +37,8 @@ namespace RemoteControlBotSample
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            MessageRouterManager = new MessageRouterManager(new LocalRoutingDataManager());
         }
     }
 }
