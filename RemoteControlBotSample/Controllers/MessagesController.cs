@@ -22,7 +22,7 @@ namespace RemoteControlBotSample
                 // Option 1: Direct handling
                 // If you want to go with this option, do remember to remove the registration
                 // of the scorables in Global.asax.cs.
-                /*MessageRouting.MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
+                /*WebApiConfig.MessageRouterManager.MakeSurePartiesAreTracked(activity);
                 string notificationData = string.Empty;
 
                 if (Notifications.NotificationsManager.TryGetNotificationData(activity, out notificationData))

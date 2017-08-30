@@ -90,11 +90,12 @@ As you noticed from the descriptions of the previous scenarios,
 without a thorough inspection (or proper documentation). In other words, IoC
 makes it more difficult to have self-documenting code. That's why I don't like
 Autofac or IoC containers in general. I'd rather have the backchannel detection
-(and other things) written in `MessagesController` class, before the decision to
-forward the `Activity` instance to the root dialog is made:
+(and other things) written in
+[MessagesController class](/RemoteControlBotSample/Controllers/MessagesController.cs),
+before the decision to forward the `Activity` instance to the root dialog is made:
 
 ```cs
-MessageRouterManager.Instance.MakeSurePartiesAreTracked(activity);
+WebApiConfig.MessageRouterManager.MakeSurePartiesAreTracked(activity);
 string notificationData = string.Empty;
 
 if (NotificationsManager.TryGetNotificationData(activity, out notificationData))
