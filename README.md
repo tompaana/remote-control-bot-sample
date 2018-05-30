@@ -12,7 +12,7 @@ work.
 ## Running and testing ##
 
 1. Clone or copy the repository
-2. Register a bot for this sample in [the bot portal](https://dev.botframework.com/)
+2. Publish the bot ([see here how](https://docs.microsoft.com/en-us/bot-framework/bot-service-continuous-deployment))
    * Unfortunately registering and publishing the bot is the easiest way to get
      to test drive it, because the implementation is dependent on
      [Direct Line](https://docs.botframework.com/en-us/restapi/directline3/)

@@ -11,12 +11,11 @@ namespace RemoteControlBotSample.Dialogs
     [Serializable]
     public class RootDialog : IDialog<object>
     {
-#pragma warning disable 1998
-        public async Task StartAsync(IDialogContext context)
+        public Task StartAsync(IDialogContext context)
         {
             context.Wait(OnMessageReceivedAsync);
+            return Task.CompletedTask;
         }
-#pragma warning restore 1998
 
         private async Task OnMessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
